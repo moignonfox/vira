@@ -1,0 +1,108 @@
+/* =========================================================
+   VIRA — Design tokens & bespoke styles
+   Palette: ink (deep aubergine) / violet / amber, on lavender & white
+   ========================================================= */
+
+:root{
+  --ink: #150A33;
+  --inkdeep: #0D0723;
+  --lav: #F6F3FF;
+  --paper: #FFFFFF;
+  --violet: #7C4DFF;
+  --violet-soft: #A78BFA;
+  --violet-deep: #5B21D6;
+  --amber: #F5A623;
+  --amber-soft: #FBC55B;
+}
+
+*{ scrollbar-color: var(--violet-soft) transparent; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  font-family: 'Inter', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display{ font-family: 'Space Grotesk', sans-serif; }
+.mono{ font-family: 'JetBrains Mono', monospace; }
+
+::selection{ background: var(--violet); color: #fff; }
+
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible{
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Ambient texture ---------- */
+.noise::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.glow{
+  background: radial-gradient(60% 60% at 50% 30%, rgba(124,77,255,0.35), transparent 70%);
+}
+
+/* ---------- Phone chat mockup ---------- */
+.bubble-in{ animation: bubbleIn .5s cubic-bezier(.2,.9,.3,1.2) both; }
+@keyframes bubbleIn{ from{opacity:0; transform: translateY(10px) scale(.96);} to{opacity:1; transform: translateY(0) scale(1);} }
+.typing span{ animation: blink 1.2s infinite; }
+.typing span:nth-child(2){ animation-delay:.2s; }
+.typing span:nth-child(3){ animation-delay:.4s; }
+@keyframes blink{ 0%,60%,100%{opacity:.25} 30%{opacity:1} }
+
+/* ---------- Scroll reveal ---------- */
+.reveal{ opacity:0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.show{ opacity:1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; transition:none; }
+  .bubble-in{ animation:none; }
+}
+
+/* ---------- Steps timeline ---------- */
+.step-line{
+  background: repeating-linear-gradient(to bottom, #D9CCFF 0, #D9CCFF 6px, transparent 6px, transparent 12px);
+}
+
+/* ---------- Architecture diagram ---------- */
+.flow-card{
+  background: var(--lav);
+  border: 1px solid rgba(124,77,255,0.15);
+  border-radius: 1.75rem;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.flow-card:hover{
+  transform: translateY(-4px);
+  border-color: rgba(124,77,255,0.4);
+  box-shadow: 0 20px 40px -20px rgba(124,77,255,0.35);
+}
+.flow-arrow{
+  color: var(--violet-soft);
+}
+.flow-pulse{
+  stroke-dasharray: 6 8;
+  animation: dashMove 2.4s linear infinite;
+}
+@keyframes dashMove{ to{ stroke-dashoffset: -140; } }
+@media (prefers-reduced-motion: reduce){
+  .flow-pulse{ animation:none; }
+}
+
+/* ---------- Pricing ---------- */
+.price-pro{
+  background: linear-gradient(160deg, var(--ink) 0%, var(--inkdeep) 100%);
+}
+
+/* ---------- Utility ---------- */
+.bg-lav{ background-color: var(--lav); }
+.bg-ink{ background-color: var(--ink); }
+.bg-inkdeep{ background-color: var(--inkdeep); }
+.text-ink{ color: var(--ink); }
+.text-violet{ color: var(--violet); }
+.bg-violet{ background-color: var(--violet); }
+.border-violet\/40:hover{ border-color: rgba(124,77,255,.4); }
